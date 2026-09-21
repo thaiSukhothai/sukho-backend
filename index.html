@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>360 Reality — Premium Real Estate Brokerage</title>
+  <meta name="description" content="360 Reality is a full-service real estate brokerage: buy, sell, rent and invest in premium apartments, villas and off-plan developments with verified listings and expert advisors." />
+  <meta name="theme-color" content="#030812" />
+  <meta property="og:title" content="360 Reality — Premium Real Estate Brokerage" />
+  <meta property="og:description" content="Buy, sell, rent and invest with advisors who see the whole picture." />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+
+  <!-- Fonts: Cormorant Garamond (display) + Manrope (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Fallback background so nothing flashes white while Tailwind downloads (theme.js overrides it) -->
+  <style>html, body { background: #030812; }</style>
+
+  <!-- Tailwind → then theme.js (configures Tailwind colours + CSS variables) → then custom CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/theme.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body class="bg-night text-ink font-sans antialiased overflow-x-hidden">
+
+  <!-- ====================================================================
+       ICON SPRITE  (use with <svg><use href="#i-name"/></svg>)
+       ==================================================================== -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path d="M6 6h.008v.008H6V6z"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></symbol>
+    <symbol id="i-arrow-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18v-5a2 2 0 012-2h16a2 2 0 012 2v5M2 18h20M4 11V7a1 1 0 011-1h5a1 1 0 011 1v4"/></symbol>
+    <symbol id="i-bath" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4zM6 12V6a2 2 0 012-2h0a2 2 0 012 2v1M7 20l-1 2M17 20l1 2"/></symbol>
+    <symbol id="i-area" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18L18 6M6 6l12 12"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></symbol>
+  </svg>
+
+  <!-- ====================================================================
+       PRELOADER
+       ==================================================================== -->
+  <div id="preloader" aria-hidden="true">
+    <div class="flex flex-col items-center">
+      <div class="relative grid h-20 w-20 place-items-center">
+        <svg class="ring-spin absolute inset-0 h-20 w-20 text-accent" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="1.2" stroke-dasharray="7 6" />
+        </svg>
+        <span class="font-display text-2xl font-semibold tracking-wide">360</span>
+      </div>
+      <div class="mt-5 font-display text-2xl tracking-[.28em] uppercase" data-bind="name">360 Reality</div>
+      <div class="mt-6 h-px w-44 overflow-hidden bg-white/10"><div id="preloader-bar" class="h-full w-0 bg-accent"></div></div>
+      <div id="preloader-pct" class="mt-3 text-[11px] tracking-[.3em] text-muted">0%</div>
+    </div>
+  </div>
+
+  <!-- fixed layers: backdrop + 3D canvas (content scrolls above them) -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+  <div class="bg-scene" aria-hidden="true"></div>
+  <canvas id="building-canvas" aria-hidden="true"></canvas>
+
+  <!-- ====================================================================
+       HEADER
+       ==================================================================== -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <nav class="nav-bar mt-3 flex items-center justify-between rounded-2xl px-4 py-3 sm:mt-4 sm:rounded-full sm:px-6" aria-label="Main">
+        <!-- logo -->
+        <a href="#top" class="flex items-center gap-3">
+          <span class="relative grid h-10 w-10 place-items-center">
+            <svg class="ring-spin absolute inset-0 h-10 w-10 text-accent" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.2" stroke-dasharray="6 5" />
+            </svg>
+            <span class="font-display text-[15px] font-bold tracking-wide">360</span>
+          </span>
+          <span class="leading-tight">
+            <span class="block font-display text-xl font-semibold tracking-wide" data-bind="name">360 Reality</span>
+            <span class="block text-[10px] uppercase tracking-[.3em] text-muted">Real Estate</span>
+          </span>
+        </a>
+
+        <ul class="hidden items-center gap-6 text-sm font-medium lg:flex xl:gap-8">
+          <li><a class="nav-link" href="#top">Home</a></li>
+          <li><a class="nav-link" href="#properties">Properties</a></li>
+          <li><a class="nav-link" href="#services">Services</a></li>
+          <li><a class="nav-link" href="#communities">Communities</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <a href="#" data-bind-href="tel:contact.phoneHref" class="hidden items-center gap-2 text-sm text-muted transition hover:text-ink md:inline-flex lg:hidden xl:inline-flex">
+            <svg class="h-4 w-4" aria-hidden="true"><use href="#i-phone" /></svg>
+            <span data-bind="contact.phone">+971 4 000 0000</span>
+          </a>
+          <a href="#contact" class="btn btn-primary hidden !px-5 !py-2.5 text-sm sm:inline-flex">Book a Consultation</a>
+          <button id="menu-btn" class="grid h-10 w-10 place-items-center rounded-full border border-white/10 lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg class="icon-open h-5 w-5" aria-hidden="true"><use href="#i-menu" /></svg>
+            <svg class="icon-close hidden h-5 w-5" aria-hidden="true"><use href="#i-x" /></svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- mobile menu -->
+      <div id="mobile-menu" class="glass-strong mt-2 hidden rounded-2xl p-4 lg:hidden">
+        <ul class="flex flex-col text-base">
+          <li><a class="block rounded-xl px-4 py-3 hover:bg-white/5" href="#top">Home</a></li>
+          <li><a class="block rounded-xl px-4 py-3 hover:bg-white/5" href="#properties">Properties</a></li>
+          <li><a class="block rounded-xl px-4 py-3 hover:bg-white/5" href="#services">Services</a></li>
+          <li><a class="block rounded-xl px-4 py-3 hover:bg-white/5" href="#communities">Communities</a></li>
+          <li><a class="block rounded-xl px-4 py-3 hover:bg-white/5" href="#about">About</a></li>
+          <li><a class="block rounded-xl px-4 py-3 hover:bg-white/5" href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary mt-3 w-full">Book a Consultation</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="site">
+
+    <!-- ==================================================================
+         HERO — pinned "chapters" (Likova-style)
+         The section is 240vh tall; the inner layer sticks for the whole
+         scroll. Each .chapter carries a data-scene that positions the 3D
+         tower while that chapter is showing (x/y/scale/opacity/dolly).
+         ================================================================== -->
+    <section id="top" class="relative" data-pin style="height:240vh">
+      <div class="pin-layer sticky top-0 overflow-hidden">
+
+        <!-- Chapter 1 : intro -->
+        <div class="chapter is-current absolute inset-0" data-chapter data-at="0" data-scene='{"x":2.4,"y":0,"scale":1,"opacity":1,"dolly":0}'>
+          <div class="mx-auto grid h-full max-w-7xl items-center px-4 pt-24 sm:px-6 lg:grid-cols-12 lg:px-8 lg:pt-0">
+            <div class="relative z-10 lg:col-span-6 xl:col-span-5">
+              <p class="eyebrow reveal">Premium Real Estate Brokerage</p>
+              <h1 class="reveal mt-6 font-display text-5xl font-medium leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl xl:text-[5.4rem]" style="--d:80ms">
+                Own a piece of<br />the <em class="text-gradient not-italic">skyline.</em>
+              </h1>
+              <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-muted" style="--d:160ms">
+                360 Reality guides investors and families through every angle of the property market — buying, selling, renting and off-plan investment — with verified listings and advisors who see the whole picture.
+              </p>
+              <div class="reveal mt-9 flex flex-wrap gap-4" style="--d:240ms">
+                <a href="#properties" class="btn btn-primary">Explore Properties <svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-r" /></svg></a>
+                <a href="#contact" class="btn btn-ghost">Book a Consultation</a>
+              </div>
+              <div class="reveal mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted" style="--d:320ms">
+                <span class="flex items-center gap-2"><svg class="h-4 w-4 text-accent" aria-hidden="true"><use href="#i-check" /></svg> Licensed &amp; regulated</span>
+                <span class="flex items-center gap-2"><svg class="h-4 w-4 text-accent" aria-hidden="true"><use href="#i-check" /></svg> 1,200+ transactions</span>
+                <span class="flex items-center gap-2"><svg class="h-4 w-4 text-accent" aria-hidden="true"><use href="#i-star" /></svg> 4.9 / 5 client rating</span>
+              </div>
+            </div>
+
+            <!-- right column: the 3D tower lives here (fixed canvas behind); floating chips add context -->
+            <div class="pointer-events-none relative hidden h-[70vh] lg:col-span-6 lg:block xl:col-span-7">
+              <div class="chip-float glass pointer-events-auto absolute right-[4%] top-[12%] flex items-center gap-3 rounded-2xl px-4 py-3" style="animation-delay:-2s">
+                <span class="grid h-9 w-9 place-items-center rounded-xl bg-accent/15 text-accent"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-home" /></svg></span>
+                <div><div class="text-sm font-semibold">Sky Villa · 4 BR</div><div class="text-xs text-muted">AED 7.9M · Ready to move</div></div>
+              </div>
+              <div class="chip-float glass pointer-events-auto absolute bottom-[16%] left-[2%] flex items-center gap-3 rounded-2xl px-4 py-3" style="animation-delay:-4s">
+                <span class="grid h-9 w-9 place-items-center rounded-xl bg-brand-500/20 text-brand-300"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-sparkle" /></svg></span>
+                <div><div class="text-sm font-semibold">Off-plan launch · Q4 2026</div><div class="text-xs text-muted">From AED 1.2M · 60/40 payment plan</div></div>
+              </div>
+
+              <!-- Shown only if WebGL is unavailable -->
+              <svg class="webgl-fallback absolute inset-x-0 bottom-0 mx-auto h-[90%] w-auto opacity-80" viewBox="0 0 400 420" fill="none" aria-hidden="true">
+                <defs><linearGradient id="fb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--brand-500)" /><stop offset="1" stop-color="var(--brand-950)" /></linearGradient></defs>
+                <rect x="40" y="220" width="70" height="200" rx="4" fill="url(#fb)" opacity=".7" />
+                <rect x="290" y="180" width="60" height="240" rx="4" fill="url(#fb)" opacity=".7" />
+                <rect x="140" y="20" width="120" height="400" rx="6" fill="url(#fb)" />
+                <rect x="120" y="300" width="160" height="120" rx="4" fill="url(#fb)" opacity=".8" />
+                <path d="M200 20V0" stroke="var(--accent)" stroke-width="2" />
+                <ellipse cx="200" cy="420" rx="190" ry="8" fill="var(--accent)" opacity=".25" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 2 : verified inventory (camera pushes in on the tower) -->
+        <div class="chapter absolute inset-0" data-chapter data-at="0.5" data-scene='{"x":2.1,"y":0.9,"scale":1.3,"opacity":1,"dolly":-3}'>
+          <div class="mx-auto grid h-full max-w-7xl items-center px-4 pt-24 sm:px-6 lg:grid-cols-12 lg:px-8 lg:pt-0">
+            <div class="relative z-10 lg:col-span-6 xl:col-span-5">
+              <p class="eyebrow">01 — Verified inventory</p>
+              <h2 class="mt-6 font-display text-5xl font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+                Every listing inspected.<br /><em class="text-gradient not-italic">Every number checked.</em>
+              </h2>
+              <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+                Title-verified, physically inspected and priced against live market data before it ever reaches your shortlist. No ghost listings, no surprises at the viewing.
+              </p>
+              <div class="mt-9 grid max-w-md grid-cols-3 gap-3">
+                <div class="glass rounded-2xl p-4"><div class="font-display text-3xl">100%</div><div class="text-xs text-muted">title-checked</div></div>
+                <div class="glass rounded-2xl p-4"><div class="font-display text-3xl">48h</div><div class="text-xs text-muted">to first viewing</div></div>
+                <div class="glass rounded-2xl p-4"><div class="font-display text-3xl">0</div><div class="text-xs text-muted">hidden fees</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 3 : off-plan (tower moves to the left, text on the right) -->
+        <div class="chapter absolute inset-0" data-chapter data-at="1" data-scene='{"x":-2.4,"y":0,"scale":1,"opacity":1,"dolly":0}'>
+          <div class="mx-auto grid h-full max-w-7xl items-center px-4 pt-24 sm:px-6 lg:grid-cols-12 lg:px-8 lg:pt-0">
+            <div class="relative z-10 lg:col-span-6 lg:col-start-7">
+              <p class="eyebrow">02 — Off-plan intelligence</p>
+              <h2 class="mt-6 font-display text-5xl font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+                Launches before<br />they <em class="text-gradient not-italic">go public.</em>
+              </h2>
+              <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+                Direct developer relationships, payment-plan analysis and rental-yield forecasting — so you buy the right unit in the right tower at the launch price, not the resale price.
+              </p>
+              <div class="mt-9 flex flex-wrap gap-4">
+                <a href="#properties" class="btn btn-primary">See off-plan launches <svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-r" /></svg></a>
+                <a href="#about" class="btn btn-ghost">Why 360 Reality</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- chapter dots (built by main.js) -->
+        <div class="absolute right-6 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center gap-3 lg:flex" data-chapter-dots aria-hidden="true"></div>
+
+        <!-- scroll hint -->
+        <div class="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-3 text-[10px] uppercase tracking-[.3em] text-muted transition-opacity" data-scroll-hint>
+          <span class="scroll-hint"></span>
+          <span class="flex items-center gap-2"><svg class="h-3.5 w-3.5 text-accent" aria-hidden="true"><use href="#i-rotate" /></svg> Scroll — the tower turns with you</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ticker -->
+    <div class="marquee border-y border-white/5 py-4" aria-hidden="true">
+      <div class="marquee-track text-[11px] uppercase tracking-[.3em] text-muted">
+        <span>Downtown Core</span><span class="text-accent">✦</span><span>Marina District</span><span class="text-accent">✦</span><span>Palm Waterfront</span><span class="text-accent">✦</span><span>Business District</span><span class="text-accent">✦</span><span>Green Community</span><span class="text-accent">✦</span><span>Canal District</span><span class="text-accent">✦</span><span>Off-plan launches</span><span class="text-accent">✦</span><span>Ready to move</span><span class="text-accent">✦</span>
+        <span>Downtown Core</span><span class="text-accent">✦</span><span>Marina District</span><span class="text-accent">✦</span><span>Palm Waterfront</span><span class="text-accent">✦</span><span>Business District</span><span class="text-accent">✦</span><span>Green Community</span><span class="text-accent">✦</span><span>Canal District</span><span class="text-accent">✦</span><span>Off-plan launches</span><span class="text-accent">✦</span><span>Ready to move</span><span class="text-accent">✦</span>
+      </div>
+    </div>
+
+    <!-- ==================================================================
+         STATS   (numbers are placeholders — edit data-count)
+         ================================================================== -->
+    <section class="relative py-16">
+      <div class="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 sm:px-6 lg:grid-cols-4 lg:gap-6 lg:px-8">
+        <div class="reveal glass rounded-2xl p-6">
+          <div class="font-display text-5xl"><span data-count="12">0</span>+</div>
+          <div class="mt-2 text-sm text-muted">Years in the market</div>
+        </div>
+        <div class="reveal glass rounded-2xl p-6" style="--d:80ms">
+          <div class="font-display text-5xl"><span data-count="1200">0</span>+</div>
+          <div class="mt-2 text-sm text-muted">Properties transacted</div>
+        </div>
+        <div class="reveal glass rounded-2xl p-6" style="--d:160ms">
+          <div class="font-display text-5xl"><span class="text-2xl align-top text-muted">AED</span> <span data-count="3.4" data-decimals="1">0</span>B</div>
+          <div class="mt-2 text-sm text-muted">Total sales value</div>
+        </div>
+        <div class="reveal glass rounded-2xl p-6" style="--d:240ms">
+          <div class="font-display text-5xl"><span data-count="98">0</span>%</div>
+          <div class="mt-2 text-sm text-muted">Client satisfaction</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         ABOUT  (tower sits on the left, text on the right)
+         ================================================================== -->
+    <section id="about" class="relative py-24 lg:py-32" data-scene='{"x":-2.5,"y":0.05,"scale":0.92,"opacity":1,"dolly":0}'>
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+        <div class="hidden lg:col-span-5 lg:block"><!-- space for the 3D tower --></div>
+        <div class="lg:col-span-7">
+          <p class="eyebrow reveal">Why 360 Reality</p>
+          <h2 class="reveal mt-5 font-display text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl" style="--d:60ms">
+            A brokerage built around <em class="text-gradient not-italic">the whole picture.</em>
+          </h2>
+          <p class="reveal mt-6 text-lg leading-relaxed text-muted" style="--d:120ms">
+            Most brokers show you a listing. We show you the market around it — the developer's track record, the community's rental yield, the payment plan's real cost and the exit strategy three years from now. That is the 360° view, and it is the standard behind every recommendation we make.
+          </p>
+
+          <ul class="mt-10 grid gap-4">
+            <li class="reveal glass flex gap-4 rounded-2xl p-5" style="--d:160ms">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-shield" /></svg></span>
+              <div><h3 class="font-semibold">Verified, exclusive inventory</h3><p class="mt-1 text-sm leading-relaxed text-muted">Every listing is inspected, title-checked and priced against live market data before it reaches you.</p></div>
+            </li>
+            <li class="reveal glass flex gap-4 rounded-2xl p-5" style="--d:240ms">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-trend" /></svg></span>
+              <div><h3 class="font-semibold">Off-plan intelligence</h3><p class="mt-1 text-sm leading-relaxed text-muted">Direct developer relations, payment-plan analysis and ROI forecasting for launches before they go public.</p></div>
+            </li>
+            <li class="reveal glass flex gap-4 rounded-2xl p-5" style="--d:320ms">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-key" /></svg></span>
+              <div><h3 class="font-semibold">End-to-end, after the handshake</h3><p class="mt-1 text-sm leading-relaxed text-muted">Mortgage, legal, snagging, furnishing and property management — one team from first viewing to keys in hand.</p></div>
+            </li>
+          </ul>
+
+          <div class="reveal mt-10 flex flex-wrap items-center gap-6" style="--d:380ms">
+            <a href="#contact" class="btn btn-primary">Get a free valuation</a>
+            <a href="#process" class="link-arrow">See how we work <svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-r" /></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         FEATURED PROPERTIES   (tower fades into the background here)
+         data-type: apartment | villa   ·   data-status: ready | offplan
+         ================================================================== -->
+    <section id="properties" class="relative py-24 lg:py-32" data-scene='{"x":0,"y":-0.6,"scale":0.72,"opacity":0.16,"dolly":0}'>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p class="eyebrow reveal">Featured listings</p>
+            <h2 class="reveal mt-5 font-display text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl" style="--d:60ms">Homes worth a <em class="text-gradient not-italic">second look.</em></h2>
+          </div>
+          <div class="reveal flex flex-wrap gap-2" style="--d:120ms">
+            <button class="filter-btn is-active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="apartment">Apartments</button>
+            <button class="filter-btn" data-filter="villa">Villas</button>
+            <button class="filter-btn" data-filter="offplan">Off-plan</button>
+          </div>
+        </div>
+
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          <div class="property-item reveal" data-type="apartment" data-status="ready">
+            <article class="card glass h-full overflow-hidden rounded-3xl">
+              <a href="#contact" class="card-media block">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=70" alt="Marina Horizon Penthouse" loading="lazy" onerror="this.remove()" />
+                <div class="absolute inset-x-4 top-4 flex items-center justify-between"><span class="badge badge-ready">Ready</span><span class="badge badge-glass">Waterfront</span></div>
+                <div class="absolute inset-x-5 bottom-4"><h3 class="font-display text-2xl leading-tight">Marina Horizon Penthouse</h3><p class="mt-1 flex items-center gap-1.5 text-sm text-muted"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-pin" /></svg> Marina District</p></div>
+              </a>
+              <div class="flex items-center justify-between gap-4 px-5 py-4">
+                <div class="text-lg font-semibold"><span class="mr-1 text-xs font-medium text-muted">AED</span>12,500,000</div>
+                <ul class="flex items-center gap-3 text-xs text-muted">
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bed" /></svg>4</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bath" /></svg>5</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area" /></svg>5,200 ft²</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <div class="property-item reveal" data-type="apartment" data-status="ready" style="--d:80ms">
+            <article class="card glass h-full overflow-hidden rounded-3xl">
+              <a href="#contact" class="card-media block">
+                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=70" alt="Skyline Loft Residence" loading="lazy" onerror="this.remove()" />
+                <div class="absolute inset-x-4 top-4 flex items-center justify-between"><span class="badge badge-ready">Ready</span><span class="badge badge-glass">City view</span></div>
+                <div class="absolute inset-x-5 bottom-4"><h3 class="font-display text-2xl leading-tight">Skyline Loft Residence</h3><p class="mt-1 flex items-center gap-1.5 text-sm text-muted"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-pin" /></svg> Downtown Core</p></div>
+              </a>
+              <div class="flex items-center justify-between gap-4 px-5 py-4">
+                <div class="text-lg font-semibold"><span class="mr-1 text-xs font-medium text-muted">AED</span>2,850,000</div>
+                <ul class="flex items-center gap-3 text-xs text-muted">
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bed" /></svg>2</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bath" /></svg>2</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area" /></svg>1,480 ft²</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <div class="property-item reveal" data-type="villa" data-status="ready" style="--d:160ms">
+            <article class="card glass h-full overflow-hidden rounded-3xl">
+              <a href="#contact" class="card-media block">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=70" alt="Palm Crest Villa" loading="lazy" onerror="this.remove()" />
+                <div class="absolute inset-x-4 top-4 flex items-center justify-between"><span class="badge badge-ready">Ready</span><span class="badge badge-glass">Beachfront</span></div>
+                <div class="absolute inset-x-5 bottom-4"><h3 class="font-display text-2xl leading-tight">Palm Crest Villa</h3><p class="mt-1 flex items-center gap-1.5 text-sm text-muted"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-pin" /></svg> Palm Waterfront</p></div>
+              </a>
+              <div class="flex items-center justify-between gap-4 px-5 py-4">
+                <div class="text-lg font-semibold"><span class="mr-1 text-xs font-medium text-muted">AED</span>18,900,000</div>
+                <ul class="flex items-center gap-3 text-xs text-muted">
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bed" /></svg>6</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bath" /></svg>7</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area" /></svg>9,800 ft²</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <div class="property-item reveal" data-type="apartment" data-status="offplan">
+            <article class="card glass h-full overflow-hidden rounded-3xl">
+              <a href="#contact" class="card-media block">
+                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=70" alt="Aurora Tower Residences" loading="lazy" onerror="this.remove()" />
+                <div class="absolute inset-x-4 top-4 flex items-center justify-between"><span class="badge badge-offplan">Off-plan</span><span class="badge badge-glass">Q4 2027</span></div>
+                <div class="absolute inset-x-5 bottom-4"><h3 class="font-display text-2xl leading-tight">Aurora Tower Residences</h3><p class="mt-1 flex items-center gap-1.5 text-sm text-muted"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-pin" /></svg> Business District</p></div>
+              </a>
+              <div class="flex items-center justify-between gap-4 px-5 py-4">
+                <div class="text-lg font-semibold"><span class="mr-1 text-xs font-medium text-muted">from AED</span>1,190,000</div>
+                <ul class="flex items-center gap-3 text-xs text-muted">
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bed" /></svg>1–3</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area" /></svg>820+ ft²</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <div class="property-item reveal" data-type="villa" data-status="offplan" style="--d:80ms">
+            <article class="card glass h-full overflow-hidden rounded-3xl">
+              <a href="#contact" class="card-media block">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=70" alt="Lagoon Garden Townhouses" loading="lazy" onerror="this.remove()" />
+                <div class="absolute inset-x-4 top-4 flex items-center justify-between"><span class="badge badge-offplan">Off-plan</span><span class="badge badge-glass">70/30 plan</span></div>
+                <div class="absolute inset-x-5 bottom-4"><h3 class="font-display text-2xl leading-tight">Lagoon Garden Townhouses</h3><p class="mt-1 flex items-center gap-1.5 text-sm text-muted"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-pin" /></svg> Green Community</p></div>
+              </a>
+              <div class="flex items-center justify-between gap-4 px-5 py-4">
+                <div class="text-lg font-semibold"><span class="mr-1 text-xs font-medium text-muted">from AED</span>3,400,000</div>
+                <ul class="flex items-center gap-3 text-xs text-muted">
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bed" /></svg>4</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bath" /></svg>4</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area" /></svg>2,900 ft²</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <div class="property-item reveal" data-type="apartment" data-status="ready" style="--d:160ms">
+            <article class="card glass h-full overflow-hidden rounded-3xl">
+              <a href="#contact" class="card-media block">
+                <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=900&q=70" alt="Canal View Apartment" loading="lazy" onerror="this.remove()" />
+                <div class="absolute inset-x-4 top-4 flex items-center justify-between"><span class="badge badge-ready">Ready</span><span class="badge badge-glass">Canal view</span></div>
+                <div class="absolute inset-x-5 bottom-4"><h3 class="font-display text-2xl leading-tight">Canal View Apartment</h3><p class="mt-1 flex items-center gap-1.5 text-sm text-muted"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-pin" /></svg> Canal District</p></div>
+              </a>
+              <div class="flex items-center justify-between gap-4 px-5 py-4">
+                <div class="text-lg font-semibold"><span class="mr-1 text-xs font-medium text-muted">AED</span>1,950,000</div>
+                <ul class="flex items-center gap-3 text-xs text-muted">
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bed" /></svg>2</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-bath" /></svg>2</li>
+                  <li class="flex items-center gap-1"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area" /></svg>1,240 ft²</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+        </div>
+
+        <div class="reveal mt-12 text-center">
+          <a href="#contact" class="btn btn-ghost">Request the full portfolio <svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-r" /></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         SERVICES
+         ================================================================== -->
+    <section id="services" class="relative py-24 lg:py-32" data-scene='{"x":0,"y":-0.6,"scale":0.72,"opacity":0.16,"dolly":0}'>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="eyebrow reveal">What we do</p>
+          <h2 class="reveal mt-5 font-display text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl" style="--d:60ms">Every angle of property, <em class="text-gradient not-italic">handled.</em></h2>
+          <p class="reveal mt-6 text-lg leading-relaxed text-muted" style="--d:120ms">One team for the entire journey — whether you are buying your first apartment, selling a villa, or building a rental portfolio from overseas.</p>
+        </div>
+
+        <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="card glass reveal rounded-3xl p-7">
+            <span class="grid h-12 w-12 place-items-center rounded-2xl bg-accent/15 text-accent"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-home" /></svg></span>
+            <h3 class="mt-6 font-display text-2xl">Buy</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Curated shortlists, private viewings and negotiation that protects your number — for homes and investments alike.</p>
+          </div>
+          <div class="card glass reveal rounded-3xl p-7" style="--d:80ms">
+            <span class="grid h-12 w-12 place-items-center rounded-2xl bg-accent/15 text-accent"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-tag" /></svg></span>
+            <h3 class="mt-6 font-display text-2xl">Sell</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Professional photography, targeted marketing and a qualified buyer network that closes faster at the right price.</p>
+          </div>
+          <div class="card glass reveal rounded-3xl p-7" style="--d:160ms">
+            <span class="grid h-12 w-12 place-items-center rounded-2xl bg-accent/15 text-accent"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-key" /></svg></span>
+            <h3 class="mt-6 font-display text-2xl">Rent</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Long-term leasing for tenants and landlords, with vetted contracts, deposits handled and zero surprises.</p>
+          </div>
+          <div class="card glass reveal rounded-3xl p-7">
+            <span class="grid h-12 w-12 place-items-center rounded-2xl bg-accent/15 text-accent"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-trend" /></svg></span>
+            <h3 class="mt-6 font-display text-2xl">Invest off-plan</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Early access to launches, yield modelling and payment-plan strategy so your capital works from day one.</p>
+          </div>
+          <div class="card glass reveal rounded-3xl p-7" style="--d:80ms">
+            <span class="grid h-12 w-12 place-items-center rounded-2xl bg-accent/15 text-accent"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-building" /></svg></span>
+            <h3 class="mt-6 font-display text-2xl">Property management</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Tenant sourcing, rent collection, maintenance and reporting — while you are anywhere in the world.</p>
+          </div>
+          <div class="card glass reveal rounded-3xl p-7" style="--d:160ms">
+            <span class="grid h-12 w-12 place-items-center rounded-2xl bg-accent/15 text-accent"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-doc" /></svg></span>
+            <h3 class="mt-6 font-display text-2xl">Mortgage &amp; legal</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Pre-approval, conveyancing and title transfer coordinated end to end with trusted partners.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         COMMUNITIES  (horizontal scroll)
+         ================================================================== -->
+    <section id="communities" class="relative py-24 lg:py-32" data-scene='{"x":0,"y":-0.6,"scale":0.72,"opacity":0.16,"dolly":0}'>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <p class="eyebrow reveal">Where we work</p>
+            <h2 class="reveal mt-5 font-display text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl" style="--d:60ms">Neighbourhoods we know <em class="text-gradient not-italic">street by street.</em></h2>
+          </div>
+          <p class="reveal max-w-sm text-sm text-muted" style="--d:120ms">Swipe or scroll sideways to explore. Prices are indicative starting points — ask us for live availability.</p>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-12 max-w-7xl pl-4 sm:pl-6 lg:pl-8">
+        <div class="snap-row pr-4">
+          <a href="#contact" class="card glass reveal group relative block aspect-[3/4] w-[270px] overflow-hidden rounded-3xl sm:w-[320px]">
+            <div class="card-media !aspect-auto absolute inset-0"><img src="https://images.unsplash.com/photo-1546412414-e1885259563a?auto=format&fit=crop&w=800&q=70" alt="Downtown Core" loading="lazy" onerror="this.remove()" /></div>
+            <div class="absolute inset-x-6 bottom-6 z-10"><p class="text-xs uppercase tracking-[.2em] text-accent">120 listings</p><h3 class="mt-1 font-display text-3xl">Downtown Core</h3><p class="mt-1 text-sm text-muted">From AED 1.4M</p></div>
+          </a>
+          <a href="#contact" class="card glass reveal group relative block aspect-[3/4] w-[270px] overflow-hidden rounded-3xl sm:w-[320px]" style="--d:60ms">
+            <div class="card-media !aspect-auto absolute inset-0"><img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=70" alt="Marina District" loading="lazy" onerror="this.remove()" /></div>
+            <div class="absolute inset-x-6 bottom-6 z-10"><p class="text-xs uppercase tracking-[.2em] text-accent">96 listings</p><h3 class="mt-1 font-display text-3xl">Marina District</h3><p class="mt-1 text-sm text-muted">From AED 1.1M</p></div>
+          </a>
+          <a href="#contact" class="card glass reveal group relative block aspect-[3/4] w-[270px] overflow-hidden rounded-3xl sm:w-[320px]" style="--d:120ms">
+            <div class="card-media !aspect-auto absolute inset-0"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=70" alt="Palm Waterfront" loading="lazy" onerror="this.remove()" /></div>
+            <div class="absolute inset-x-6 bottom-6 z-10"><p class="text-xs uppercase tracking-[.2em] text-accent">42 listings</p><h3 class="mt-1 font-display text-3xl">Palm Waterfront</h3><p class="mt-1 text-sm text-muted">From AED 4.8M</p></div>
+          </a>
+          <a href="#contact" class="card glass reveal group relative block aspect-[3/4] w-[270px] overflow-hidden rounded-3xl sm:w-[320px]" style="--d:180ms">
+            <div class="card-media !aspect-auto absolute inset-0"><img src="https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?auto=format&fit=crop&w=800&q=70" alt="Business District" loading="lazy" onerror="this.remove()" /></div>
+            <div class="absolute inset-x-6 bottom-6 z-10"><p class="text-xs uppercase tracking-[.2em] text-accent">150 listings</p><h3 class="mt-1 font-display text-3xl">Business District</h3><p class="mt-1 text-sm text-muted">From AED 890K</p></div>
+          </a>
+          <a href="#contact" class="card glass reveal group relative block aspect-[3/4] w-[270px] overflow-hidden rounded-3xl sm:w-[320px]" style="--d:240ms">
+            <div class="card-media !aspect-auto absolute inset-0"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=70" alt="Green Community" loading="lazy" onerror="this.remove()" /></div>
+            <div class="absolute inset-x-6 bottom-6 z-10"><p class="text-xs uppercase tracking-[.2em] text-accent">64 listings</p><h3 class="mt-1 font-display text-3xl">Green Community</h3><p class="mt-1 text-sm text-muted">From AED 2.2M</p></div>
+          </a>
+          <a href="#contact" class="card glass reveal group relative block aspect-[3/4] w-[270px] overflow-hidden rounded-3xl sm:w-[320px]" style="--d:300ms">
+            <div class="card-media !aspect-auto absolute inset-0"><img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=800&q=70" alt="Canal District" loading="lazy" onerror="this.remove()" /></div>
+            <div class="absolute inset-x-6 bottom-6 z-10"><p class="text-xs uppercase tracking-[.2em] text-accent">58 listings</p><h3 class="mt-1 font-display text-3xl">Canal District</h3><p class="mt-1 text-sm text-muted">From AED 1.3M</p></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         PROCESS
+         ================================================================== -->
+    <section id="process" class="relative py-24 lg:py-32" data-scene='{"x":0,"y":-0.6,"scale":0.72,"opacity":0.16,"dolly":0}'>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="eyebrow reveal">How it works</p>
+          <h2 class="reveal mt-5 font-display text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl" style="--d:60ms">From first call to <em class="text-gradient not-italic">keys in hand.</em></h2>
+        </div>
+        <div class="hairline mt-12"></div>
+        <ol class="grid gap-10 pt-12 sm:grid-cols-2 lg:grid-cols-4">
+          <li class="reveal">
+            <div class="step-num">01</div>
+            <h3 class="mt-5 text-lg font-semibold">Discovery</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">A 30-minute call to understand your goals, budget, timeline and how you like to work.</p>
+          </li>
+          <li class="reveal" style="--d:80ms">
+            <div class="step-num">02</div>
+            <h3 class="mt-5 text-lg font-semibold">Shortlist</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Hand-picked options with data on price history, rental yield, service charges and community.</p>
+          </li>
+          <li class="reveal" style="--d:160ms">
+            <div class="step-num">03</div>
+            <h3 class="mt-5 text-lg font-semibold">Viewings &amp; offer</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Private viewings, then negotiation and due diligence on your behalf — we protect your number.</p>
+          </li>
+          <li class="reveal" style="--d:240ms">
+            <div class="step-num">04</div>
+            <h3 class="mt-5 text-lg font-semibold">Close &amp; beyond</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Paperwork, transfer and handover — plus management, leasing and resale whenever you need it.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         TESTIMONIALS
+         ================================================================== -->
+    <section id="testimonials" class="relative py-24 lg:py-32" data-scene='{"x":0,"y":-0.6,"scale":0.72,"opacity":0.16,"dolly":0}'>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="eyebrow reveal">Client stories</p>
+          <h2 class="reveal mt-5 font-display text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl" style="--d:60ms">Trusted by families and <em class="text-gradient not-italic">investors alike.</em></h2>
+        </div>
+        <div class="mt-14 grid gap-5 lg:grid-cols-3">
+          <figure class="card glass reveal flex flex-col rounded-3xl p-7">
+            <div class="flex gap-1 text-accent" aria-label="5 out of 5 stars"><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg></div>
+            <blockquote class="mt-5 grow font-display text-2xl leading-snug">“They found us a Marina apartment that wasn't even listed yet, negotiated below asking and handled the mortgage. Effortless.”</blockquote>
+            <figcaption class="mt-6 text-sm"><span class="font-semibold">Sarah M.</span><span class="text-muted"> — Homeowner, Marina District</span></figcaption>
+          </figure>
+          <figure class="card glass reveal flex flex-col rounded-3xl p-7" style="--d:80ms">
+            <div class="flex gap-1 text-accent" aria-label="5 out of 5 stars"><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg></div>
+            <blockquote class="mt-5 grow font-display text-2xl leading-snug">“As an overseas investor I needed honest numbers, not a sales pitch. The yield analysis was spot on and the unit was tenanted within two weeks.”</blockquote>
+            <figcaption class="mt-6 text-sm"><span class="font-semibold">Rajesh K.</span><span class="text-muted"> — Investor, London</span></figcaption>
+          </figure>
+          <figure class="card glass reveal flex flex-col rounded-3xl p-7" style="--d:160ms">
+            <div class="flex gap-1 text-accent" aria-label="5 out of 5 stars"><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg><svg class="h-4 w-4"><use href="#i-star" /></svg></div>
+            <blockquote class="mt-5 grow font-display text-2xl leading-snug">“Sold our villa in 19 days at full asking. The photography and marketing were on another level.”</blockquote>
+            <figcaption class="mt-6 text-sm"><span class="font-semibold">Daniel &amp; Leila R.</span><span class="text-muted"> — Sellers, Green Community</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         CTA BANNER  (tower comes back on the right)
+         ================================================================== -->
+    <section id="cta" class="relative py-16 lg:py-24" data-scene='{"x":2.3,"y":-0.2,"scale":0.95,"opacity":0.9,"dolly":0}'>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-brand-700/60 via-surface/70 to-night/80 p-8 sm:p-12 lg:p-16">
+          <div class="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl"></div>
+          <div class="relative max-w-2xl">
+            <p class="eyebrow">Ready when you are</p>
+            <h2 class="mt-5 font-display text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl">Ready to make <em class="text-gradient not-italic">your move?</em></h2>
+            <p class="mt-5 text-lg text-muted">Tell us what you are looking for and an advisor will call you back within one business day — no pressure, no obligation.</p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a href="#contact" class="btn btn-primary">Send an enquiry <svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-r" /></svg></a>
+              <a href="#" data-bind-href="wa:contact.whatsapp" target="_blank" rel="noopener" class="btn btn-ghost"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-whatsapp" /></svg> Chat on WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         CONTACT
+         ================================================================== -->
+    <section id="contact" class="relative py-24 lg:py-32" data-scene='{"x":-2.6,"y":-0.1,"scale":0.85,"opacity":0.5,"dolly":0}'>
+      <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+
+        <div class="lg:col-span-5">
+          <p class="eyebrow reveal">Get in touch</p>
+          <h2 class="reveal mt-5 font-display text-4xl font-medium leading-tight sm:text-5xl lg:text-6xl" style="--d:60ms">Let's talk about <em class="text-gradient not-italic">your next move.</em></h2>
+          <p class="reveal mt-6 text-lg leading-relaxed text-muted" style="--d:120ms">Call, message or drop by the office. Every enquiry is answered by a licensed advisor, not a bot.</p>
+
+          <ul class="mt-10 space-y-5">
+            <li class="reveal flex items-start gap-4" style="--d:160ms">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-phone" /></svg></span>
+              <div><div class="text-xs uppercase tracking-[.2em] text-muted">Phone</div><a href="#" data-bind-href="tel:contact.phoneHref" class="mt-1 block font-semibold hover:text-accent" data-bind="contact.phone">+971 4 000 0000</a></div>
+            </li>
+            <li class="reveal flex items-start gap-4" style="--d:220ms">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-mail" /></svg></span>
+              <div><div class="text-xs uppercase tracking-[.2em] text-muted">Email</div><a href="#" data-bind-href="mailto:contact.email" class="mt-1 block font-semibold hover:text-accent" data-bind="contact.email">enquiries@example.com</a></div>
+            </li>
+            <li class="reveal flex items-start gap-4" style="--d:280ms">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-whatsapp" /></svg></span>
+              <div><div class="text-xs uppercase tracking-[.2em] text-muted">WhatsApp</div><a href="#" data-bind-href="wa:contact.whatsapp" target="_blank" rel="noopener" class="mt-1 block font-semibold hover:text-accent">Start a chat</a></div>
+            </li>
+            <li class="reveal flex items-start gap-4" style="--d:340ms">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-pin" /></svg></span>
+              <div><div class="text-xs uppercase tracking-[.2em] text-muted">Office</div><div class="mt-1 font-semibold" data-bind="contact.address">Level 21, Skyline Tower, Marina District</div><div class="text-sm text-muted" data-bind="contact.city">Dubai, United Arab Emirates</div></div>
+            </li>
+            <li class="reveal flex items-start gap-4" style="--d:400ms">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-clock" /></svg></span>
+              <div><div class="text-xs uppercase tracking-[.2em] text-muted">Hours</div><div class="mt-1 font-semibold" data-bind="contact.hours">Mon – Sat · 9:00 – 19:00</div></div>
+            </li>
+          </ul>
+
+          <div class="reveal mt-10 flex items-center gap-3" style="--d:460ms">
+            <a href="#" data-bind-href="contact.socials.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-muted transition hover:border-accent/60 hover:text-accent"><svg class="h-5 w-5"><use href="#i-instagram" /></svg></a>
+            <a href="#" data-bind-href="contact.socials.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn" class="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-muted transition hover:border-accent/60 hover:text-accent"><svg class="h-5 w-5"><use href="#i-linkedin" /></svg></a>
+            <a href="#" data-bind-href="contact.socials.facebook" target="_blank" rel="noopener" aria-label="Facebook" class="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-muted transition hover:border-accent/60 hover:text-accent"><svg class="h-5 w-5"><use href="#i-facebook" /></svg></a>
+          </div>
+        </div>
+
+        <!-- Enquiry form → delivered to SITE.contact.email (see assets/js/theme.js) -->
+        <div class="lg:col-span-7">
+          <form id="enquiry-form" class="glass-strong reveal grid gap-5 rounded-3xl p-6 sm:grid-cols-2 sm:p-8" style="--d:120ms">
+            <!-- honeypot: humans never see this, bots fill it in -->
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+            <div>
+              <label for="f-name" class="field-label">Full name</label>
+              <input id="f-name" name="name" type="text" class="field" placeholder="Your name" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="f-email" class="field-label">Email</label>
+              <input id="f-email" name="email" type="email" class="field" placeholder="you@email.com" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="f-phone" class="field-label">Phone / WhatsApp</label>
+              <input id="f-phone" name="phone" type="tel" class="field" placeholder="+971 50 000 0000" autocomplete="tel" />
+            </div>
+            <div>
+              <label for="f-interest" class="field-label">I'm interested in</label>
+              <select id="f-interest" name="interest" class="field">
+                <option>Buying</option><option>Selling</option><option>Renting</option><option>Off-plan investment</option><option>Property management</option><option>Something else</option>
+              </select>
+            </div>
+            <div>
+              <label for="f-type" class="field-label">Property type</label>
+              <select id="f-type" name="property_type" class="field">
+                <option>Apartment</option><option>Penthouse</option><option>Villa</option><option>Townhouse</option><option>Commercial</option><option>Land / plot</option>
+              </select>
+            </div>
+            <div>
+              <label for="f-budget" class="field-label">Budget</label>
+              <select id="f-budget" name="budget" class="field">
+                <option>Under AED 1M</option><option>AED 1M – 3M</option><option>AED 3M – 7M</option><option>AED 7M – 15M</option><option>AED 15M+</option><option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label for="f-message" class="field-label">Message</label>
+              <textarea id="f-message" name="message" rows="4" class="field" placeholder="Tell us about the property you have in mind, your timeline, or anything else that helps."></textarea>
+            </div>
+            <label class="flex items-start gap-3 text-sm text-muted sm:col-span-2">
+              <input type="checkbox" name="consent" class="check mt-0.5" value="yes" required />
+              <span>I agree to be contacted about my enquiry. We never share your details with third parties.</span>
+            </label>
+            <div class="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center">
+              <button type="submit" class="btn btn-primary">Send enquiry <svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-r" /></svg></button>
+              <p id="form-status" class="form-status text-sm" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       FOOTER
+       ==================================================================== -->
+  <footer class="site relative border-t border-white/5 pt-16 pb-8" data-scene='{"x":0,"y":-1,"scale":0.7,"opacity":0.15,"dolly":0}'>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <a href="#top" class="flex items-center gap-3">
+            <span class="relative grid h-10 w-10 place-items-center">
+              <svg class="absolute inset-0 h-10 w-10 text-accent" viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.2" stroke-dasharray="6 5" /></svg>
+              <span class="font-display text-[15px] font-bold">360</span>
+            </span>
+            <span class="font-display text-xl font-semibold tracking-wide" data-bind="name">360 Reality</span>
+          </a>
+          <p class="mt-5 max-w-sm text-sm leading-relaxed text-muted">A full-service real estate brokerage for buyers, sellers, tenants and investors who want the whole picture before they decide.</p>
+          <p class="mt-5 text-xs text-muted" data-bind="contact.licence">Brokerage Licence No. 000000</p>
+        </div>
+        <div class="lg:col-span-2">
+          <h4 class="text-xs font-semibold uppercase tracking-[.2em] text-muted">Company</h4>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <li><a href="#about" class="hover:text-accent">About</a></li>
+            <li><a href="#services" class="hover:text-accent">Services</a></li>
+            <li><a href="#communities" class="hover:text-accent">Communities</a></li>
+            <li><a href="#process" class="hover:text-accent">How it works</a></li>
+          </ul>
+        </div>
+        <div class="lg:col-span-2">
+          <h4 class="text-xs font-semibold uppercase tracking-[.2em] text-muted">Properties</h4>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <li><a href="#properties" class="hover:text-accent">Apartments</a></li>
+            <li><a href="#properties" class="hover:text-accent">Villas</a></li>
+            <li><a href="#properties" class="hover:text-accent">Off-plan</a></li>
+            <li><a href="#contact" class="hover:text-accent">Rentals</a></li>
+          </ul>
+        </div>
+        <div class="lg:col-span-3">
+          <h4 class="text-xs font-semibold uppercase tracking-[.2em] text-muted">Contact</h4>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <li><a href="#" data-bind-href="tel:contact.phoneHref" class="hover:text-accent" data-bind="contact.phone">+971 4 000 0000</a></li>
+            <li><a href="#" data-bind-href="mailto:contact.email" class="hover:text-accent" data-bind="contact.email">enquiries@example.com</a></li>
+            <li class="text-muted" data-bind="contact.address">Level 21, Skyline Tower, Marina District</li>
+            <li class="text-muted" data-bind="contact.city">Dubai, United Arab Emirates</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hairline mt-12"></div>
+      <div class="flex flex-col gap-3 pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+        <p>© <span data-year>2026</span> <span data-bind="name">360 Reality</span>. All rights reserved.</p>
+        <p class="flex gap-5"><a href="#" class="hover:text-accent">Privacy</a><a href="#" class="hover:text-accent">Terms</a><a href="#" class="hover:text-accent">Cookies</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- floating buttons -->
+  <a id="whatsapp-fab" class="fab" href="#" data-bind-href="wa:contact.whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg class="h-7 w-7" aria-hidden="true"><use href="#i-whatsapp" /></svg>
+  </a>
+  <button id="to-top" class="fab" type="button" aria-label="Back to top">
+    <svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-up" /></svg>
+  </button>
+
+  <!-- scripts: main.js first so the preloader starts while Three.js is still downloading -->
+  <script src="assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="assets/js/building3d.js"></script>
+</body>
+</html>
