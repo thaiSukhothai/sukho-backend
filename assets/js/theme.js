@@ -1,119 +1,141 @@
 /* ============================================================================
-   360 REALITY — SITE CONFIG & COLOUR THEME
+   360 REALTY — SITE CONFIG & COLOUR THEME
    ----------------------------------------------------------------------------
    This is the ONE file you need to edit for:
 
-     1. COLOUR SCHEME  → change ACTIVE_PALETTE below (or edit / add a palette)
-     2. ENQUIRY EMAIL  → SITE.contact.email  (where the contact form delivers)
-     3. Phone, WhatsApp, address, opening hours, social links
-     4. 3D building behaviour → SITE.scene
+     1. COLOUR SCHEME  → change ACTIVE_PALETTE below (or edit / add a palette).
+                         Every palette has a `dark` and a `light` set; the
+                         visitor's toggle (and their OS preference) picks one.
+     2. ENQUIRY EMAIL  → SITE.contact.email  (contact form + newsletter deliver here)
+     3. Phone / WhatsApp / address / social links (all optional — leave '' to hide)
+     4. 3D dial behaviour → SITE.dial
 
-   Every colour on the site — Tailwind classes (bg-brand-500, text-accent …),
-   custom CSS (var(--brand-500), var(--accent) …) and the 3D tower — is
-   generated from the active palette, so changing it here changes everything.
+   Every colour on the site — Tailwind classes (bg-accent/15, text-muted …),
+   custom CSS (var(--accent), var(--gold) …) and the 3D dial — is generated
+   from the active palette, so changing it here changes everything.
    ============================================================================ */
 
 var PALETTES = {
 
-  /* ── Default: deep navy + electric blue + cyan glow ─────────────────────── */
-  oceanBlue: {
-    brand: {                       // main blue scale (50 = lightest, 950 = darkest)
-      50:  '#eef6ff', 100: '#d9eaff', 200: '#b9daff', 300: '#86c2ff', 400: '#4d9fff',
-      500: '#237cff', 600: '#0c5cf2', 700: '#0a47d4', 800: '#0e3aa9', 900: '#123486', 950: '#0a1c4d',
+  /* ── Default: deep teal-navy + teal + gold (matches the brand document) ──── */
+  dubaiDusk: {
+    brand: {                       // teal scale (50 = lightest, 950 = darkest)
+      50:  '#effbf9', 100: '#d2f3ef', 200: '#a8e6e0', 300: '#74d3cc', 400: '#45bdb5',
+      500: '#2ca198', 600: '#22837c', 700: '#1f6963', 800: '#1d5450', 900: '#1b4643', 950: '#0b2a2a',
     },
-    accent:  '#3fe4ff',            // highlights, glows, lit windows on the tower
-    bg:      '#030812',            // page background
-    surface: '#08132b',            // cards / panels
-    ink:     '#e9f1ff',            // main text
-    muted:   '#8fa3c4',            // secondary text
+    dark: {
+      bg:       '#0f2229',         // page background
+      surface:  '#15303a',         // cards / panels
+      ink:      '#f1f4f1',         // main text
+      muted:    '#8da2a5',         // secondary text
+      accent:   '#3db5ae',         // teal highlights, buttons, the Downtown dot
+      accent2:  '#74d3cc',         // second colour of button gradients
+      gold:     '#d6b27a',         // eyebrows, separators, the other five dots
+      onAccent: '#0b1a1f',         // text on accent-coloured buttons
+      line:     '#ffffff',         // hairlines / borders (used with transparency)
+      shadow:   '#000000',         // card shadows (used with transparency)
+      gradEnd:  '#ffffff',         // last stop of the heading gradient
+    },
+    light: {
+      bg:       '#f3f7f7',
+      surface:  '#ffffff',
+      ink:      '#0f2229',
+      muted:    '#5b6f74',
+      accent:   '#15756e',
+      accent2:  '#1f6963',
+      gold:     '#9a7a3a',
+      onAccent: '#ffffff',
+      line:     '#0f2229',
+      shadow:   '#0f2229',
+      gradEnd:  '#0f2229',
+    },
   },
 
-  /* ── Darker, more "royal" blue ──────────────────────────────────────────── */
+  /* ── Deep navy + periwinkle (the previous look) ─────────────────────────── */
   midnightSapphire: {
     brand: {
       50:  '#eef2ff', 100: '#dde4ff', 200: '#c2cdff', 300: '#98aaff', 400: '#6b7dff',
       500: '#4a55f7', 600: '#3a3ae6', 700: '#302ecb', 800: '#2a28a3', 900: '#262781', 950: '#10103f',
     },
-    accent:  '#8fb6ff',
-    bg:      '#04051a',
-    surface: '#0b0d2b',
-    ink:     '#eef0ff',
-    muted:   '#9aa3cf',
+    dark:  { bg: '#04051a', surface: '#0b0d2b', ink: '#eef0ff', muted: '#9aa3cf', accent: '#8fb6ff', accent2: '#c2cdff', gold: '#e2c48a', onAccent: '#04051a', line: '#ffffff', shadow: '#000000', gradEnd: '#ffffff' },
+    light: { bg: '#f4f6fc', surface: '#ffffff', ink: '#0d1033', muted: '#5c6487', accent: '#2f3fd6', accent2: '#302ecb', gold: '#9a7a3a', onAccent: '#ffffff', line: '#0d1033', shadow: '#0d1033', gradEnd: '#0d1033' },
   },
 
-  /* ── Cooler steel / arctic blue ─────────────────────────────────────────── */
-  arcticSteel: {
-    brand: {
-      50:  '#f0f7fb', 100: '#dbeaf3', 200: '#bcd8e8', 300: '#8fbcd6', 400: '#5a99bf',
-      500: '#3b7ca6', 600: '#2d6389', 700: '#27506f', 800: '#24445d', 900: '#223a4f', 950: '#142534',
-    },
-    accent:  '#7fe3ff',
-    bg:      '#071018',
-    surface: '#0e1a26',
-    ink:     '#ecf4f9',
-    muted:   '#8ea4b5',
-  },
-
-  /* ── Example of a non-blue scheme (emerald + gold) — proves nothing is locked */
+  /* ── Emerald + gold ─────────────────────────────────────────────────────── */
   emeraldLuxe: {
     brand: {
       50:  '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7', 400: '#34d399',
       500: '#10b981', 600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b', 950: '#022c22',
     },
-    accent:  '#f5d67a',
-    bg:      '#03100b',
-    surface: '#07211a',
-    ink:     '#eafff5',
-    muted:   '#8fb8a6',
+    dark:  { bg: '#03100b', surface: '#07211a', ink: '#eafff5', muted: '#8fb8a6', accent: '#34d399', accent2: '#6ee7b7', gold: '#f5d67a', onAccent: '#03100b', line: '#ffffff', shadow: '#000000', gradEnd: '#ffffff' },
+    light: { bg: '#f3f8f5', surface: '#ffffff', ink: '#06261c', muted: '#4f6b60', accent: '#047857', accent2: '#065f46', gold: '#9a7a3a', onAccent: '#ffffff', line: '#06261c', shadow: '#06261c', gradEnd: '#06261c' },
   },
 };
 
 /* ▼▼▼  PICK THE ACTIVE COLOUR SCHEME HERE  ▼▼▼ */
-var ACTIVE_PALETTE = 'midnightSapphire';
+var ACTIVE_PALETTE = 'dubaiDusk';
 
 
 /* ============================================================================
    SITE SETTINGS
    ============================================================================ */
 window.SITE = {
-  name: '360 Reality',
-  tagline: 'Premium Real Estate Brokerage',
+  name: '360 Realty',
+  tagline: 'Dubai property, seen from every angle.',
 
   contact: {
-    /* ▼▼▼  ENQUIRIES FROM THE CONTACT FORM ARE SENT HERE  ▼▼▼
-       The form uses FormSubmit (https://formsubmit.co) — no account needed.
-       The very first message triggers an activation email to this address:
-       click "Activate" once and every enquiry after that lands in your inbox. */
-    email:     'Sukhothai@360core.ae',
+    /* ▼▼▼  ENQUIRIES FROM THE CONTACT FORM AND NEWSLETTER ARE EMAILED HERE  ▼▼▼
+       The very first message triggers a one-time activation email to this address — click
+       "Activate" and every enquiry after that arrives directly (see form.provider below).
+       Optional: if the activation email shows a random form ID, you can paste that here
+       instead of the address to keep the address out of the page source. */
+    email:     'hello@360.realty',
 
-    phone:     '+971 4 000 0000',          // shown on the site
-    phoneHref: '+97140000000',             // used for tap-to-call (digits only)
-    whatsapp:  '971500000000',             // digits only, country code first (no +)
-    address:   'Level 21, Skyline Tower, Marina District',
-    city:      'Dubai, United Arab Emirates',
-    hours:     'Mon – Sat · 9:00 – 19:00',
-    licence:   'Brokerage Licence No. 000000',   // e.g. RERA / ORN number
+    /* Optional. Leave '' and the matching element is hidden automatically. */
+    phone:     '',                         // shown on the site, e.g. '+971 4 000 0000'
+    phoneHref: '',                         // tap-to-call, digits only, e.g. '+97140000000'
+    whatsapp:  '',                         // digits only, country code first, e.g. '971500000000'
+    address:   '',                         // office address line
+    city:      'Dubai, UAE',
     socials: {
-      instagram: 'https://instagram.com/',
-      linkedin:  'https://linkedin.com/',
-      facebook:  'https://facebook.com/',
+      instagram: '',
+      linkedin:  '',
+      facebook:  '',
     },
   },
 
   form: {
-    subject: 'New enquiry from the 360 Reality website',
+    /* ▼▼▼  HOW ENQUIRIES REACH THE INBOX  ▼▼▼
+       'formsubmit' → every enquiry is emailed straight to SITE.contact.email by FormSubmit
+                      (https://formsubmit.co). Works on Netlify or any other host, no account,
+                      no server. The inbox owner clicks a one-time activation link the first
+                      time a message arrives — after that every enquiry lands in the inbox.
+       'netlify'    → Netlify Forms only: submissions go to the Netlify dashboard and are
+                      emailed to the address set under Site configuration → Forms →
+                      Form notifications (README §3).
+       'both'       → FormSubmit email + a copy in the Netlify dashboard. */
+    provider:          'formsubmit',
+    subject:           'New enquiry from the 360 Realty website',
+    newsletterSubject: 'Newsletter sign-up from the 360 Realty website',
   },
 
-  /* 3D building tunables */
-  scene: {
-    floors: 40,            // number of floors on the main twisting tower
-    twistDegrees: 88,      // total twist from bottom to top
-    idleSpin: true,        // slow rotation even when not scrolling
-    scrollSpin: 1,         // how much the tower turns while scrolling (0 = none, 2 = double)
-    buildOnLoad: true,     // "construction" animation on page load
-    lightSweep: true,      // pulse of light travelling up the tower
-    particles: true,       // floating light particles
-    mouseParallax: true,   // camera follows the mouse slightly
+  /* Motion. Windows / macOS "reduce animations" settings make browsers report
+     prefers-reduced-motion; set this to true to switch the marquee, the scroll
+     animations and the dial's idle motion off for those visitors. */
+  motion: {
+    respectReducedMotion: false,
+  },
+
+  /* 3D dial tunables (assets/js/dial3d.js) */
+  dial: {
+    idleSpin: true,        // the dial turns slowly on its own
+    scrollSpin: 1,         // how much it turns while scrolling (0 = none, 2 = double)
+    sweep: true,           // the radar-style sweep that lights up each community in turn
+    globe: true,           // faint latitude / longitude lines inside the dial
+    buildOnLoad: true,     // ticks and rings assemble after the preloader
+    mouseParallax: true,   // the dial tilts slightly towards the cursor
+    tiltX: -0.62,          // base tilt (radians) — 0 would be flat-on
+    tiltY: 0.26,
   },
 
   colors: PALETTES[ACTIVE_PALETTE],
@@ -122,9 +144,15 @@ window.SITE = {
 
 /* ============================================================================
    APPLY THE THEME  (no need to edit below this line)
+   ----------------------------------------------------------------------------
+   Writes two sets of CSS variables (dark + light) and configures Tailwind so
+   every utility class reads from those variables. Switching mode is then just
+   <html data-theme="light"> — see assets/js/main.js.
    ============================================================================ */
 (function applyTheme() {
-  var C = window.SITE.colors;
+  var P = window.SITE.colors;
+  var MODE_KEYS = ['bg', 'surface', 'ink', 'muted', 'accent', 'accent2', 'gold', 'onAccent', 'line', 'shadow', 'gradEnd'];
+  var CSS_NAMES = { accent2: 'accent-2', onAccent: 'on-accent', gradEnd: 'grad-end' };
 
   function hexToRgb(hex) {
     var h = String(hex).replace('#', '');
@@ -132,45 +160,59 @@ window.SITE = {
     var n = parseInt(h, 16);
     return ((n >> 16) & 255) + ' ' + ((n >> 8) & 255) + ' ' + (n & 255);
   }
+  function modeVars(mode) {
+    var M = P[mode], s = '';
+    MODE_KEYS.forEach(function (k) {
+      var name = CSS_NAMES[k] || k;
+      s += '--' + name + ':' + M[k] + ';--' + name + '-rgb:' + hexToRgb(M[k]) + ';';
+    });
+    return s;
+  }
 
-  /* 1) Tailwind — semantic colour names used throughout index.html */
+  /* 1) CSS variables — used by assets/css/styles.css and the 3D dial */
+  var brandVars = '';
+  Object.keys(P.brand).forEach(function (k) {
+    brandVars += '--brand-' + k + ':' + P.brand[k] + ';--brand-' + k + '-rgb:' + hexToRgb(P.brand[k]) + ';';
+  });
+  var css =
+    ':root{' + brandVars + modeVars('dark') + 'color-scheme:dark;}' +
+    ':root[data-theme="light"]{' + modeVars('light') + 'color-scheme:light;}' +
+    /* sections that stay dark in both modes (e.g. "Why Dubai") */
+    '.band-dark{' + modeVars('dark') + 'color-scheme:dark;}';
+  var style = document.createElement('style');
+  style.id = 'theme-vars';
+  style.textContent = css;
+  (document.head || document.documentElement).appendChild(style);
+
+  /* 2) Tailwind — semantic colour names used throughout index.html.
+        They point at the variables, so bg-accent/15, text-muted, border-line/10 …
+        all follow the dark / light switch automatically. */
   if (window.tailwind) {
     window.tailwind.config = {
       theme: {
         extend: {
           colors: {
-            brand:   C.brand,      // bg-brand-500, text-brand-300, border-brand-700/40 …
-            accent:  C.accent,     // text-accent, bg-accent/10 …
-            night:   C.bg,         // bg-night
-            surface: C.surface,    // bg-surface
-            ink:     C.ink,        // text-ink
-            muted:   C.muted,      // text-muted
+            brand:   P.brand,                                   // bg-brand-500, text-brand-300 …
+            accent:  'rgb(var(--accent-rgb) / <alpha-value>)',  // text-accent, bg-accent/10 …
+            gold:    'rgb(var(--gold-rgb) / <alpha-value>)',
+            night:   'rgb(var(--bg-rgb) / <alpha-value>)',      // bg-night
+            surface: 'rgb(var(--surface-rgb) / <alpha-value>)',
+            ink:     'rgb(var(--ink-rgb) / <alpha-value>)',
+            muted:   'rgb(var(--muted-rgb) / <alpha-value>)',
+            line:    'rgb(var(--line-rgb) / <alpha-value>)',    // border-line/10, bg-line/5 …
           },
           fontFamily: {
-            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-            sans:    ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-          },
-          boxShadow: {
-            glow: '0 0 60px -12px ' + C.accent + 'aa',
-            card: '0 24px 60px -24px rgba(0,0,0,.7)',
+            display: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            sans:    ['"Hanken Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
           },
         },
       },
     };
   }
 
-  /* 2) CSS variables — used by assets/css/styles.css */
-  var root = document.documentElement.style;
-  Object.keys(C.brand).forEach(function (k) {
-    root.setProperty('--brand-' + k, C.brand[k]);
-    root.setProperty('--brand-' + k + '-rgb', hexToRgb(C.brand[k]));
-  });
-  ['accent', 'bg', 'surface', 'ink', 'muted'].forEach(function (k) {
-    root.setProperty('--' + k, C[k]);
-    root.setProperty('--' + k + '-rgb', hexToRgb(C[k]));
-  });
-
-  /* 3) Browser UI colour (mobile address bar) */
+  /* 3) Browser UI colour (mobile address bar) for the mode we start in */
+  var mode = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
   var meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', C.bg);
+  if (meta) meta.setAttribute('content', P[mode].bg);
 })();

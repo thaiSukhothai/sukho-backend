@@ -1,0 +1,13 @@
+# Netlify custom headers (https://docs.netlify.com/manage/routing/headers/)
+# This file is honoured by every deploy method: drag and drop, Git and CLI.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+# Images rarely change, so browsers may keep them for a day.
+# Code files keep Netlify's default (revalidate every time), so a redeploy shows up at once.
+/assets/img/*
+  Cache-Control: public, max-age=86400
